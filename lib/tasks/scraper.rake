@@ -6,7 +6,7 @@ require 'JSON'
 
 # set API token and URL
 
-auth_token = "ADDA#{TAPS}"
+auth_token = "ADD#{3TAPSAPIKEY}"
 polling_url = "http://polling.3taps.com/poll"
 
 # Grab data until up-to-date
