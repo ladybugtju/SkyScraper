@@ -35,7 +35,7 @@ loop do
 
 
       # Store results in database
-        result["postings"].each do |posting|
+  result["postings"].each do |posting|
 
       # # Create new Post
        @post = Post.new
@@ -63,13 +63,16 @@ loop do
              @image.post_id = @post.id
              @image.save
         end
-      end
+    end
       
       Anchor.first.update(value: result["anchor"])
       puts Anchor.first.value
       break if result["postings"].empty? 
      end
   end
+
+
+
 
   desc "Destroy all posting data"
   task destroy_all_posts: :environment do
@@ -110,4 +113,15 @@ loop do
         @location.save
       end
   end
+
+
+desc "Discard old data"
+task discard_old_data: :environment do
+  Post.all.each do |post|
+    if post.created_at < 6.hours.ago
+        post.destroy
+    end 
+  end
+end
+
 end
